@@ -10,6 +10,7 @@ import java.util.List;
 public class Decision extends JFrame implements ActionListener{
 
 	ArrayList<String> todos;
+	ArrayList<String> filled;
 	JTextField td1;
 	JTextField td2;
 	JTextField td3;
@@ -20,7 +21,6 @@ public class Decision extends JFrame implements ActionListener{
 	JTextField td8;
 	JButton magic;
 	int anzahl=8;
-	String chosen = null;
 	String s2="How about ";
 
 	public Decision() {
@@ -126,49 +126,7 @@ public class Decision extends JFrame implements ActionListener{
 		return todos;
 
 	}
-
-	/*
-	public String chooseTask() {
-		String inp1=td1.getText();
-		String inp2=td2.getText();
-		String inp3=td3.getText();
-		String inp4=td4.getText();
-		String inp5=td5.getText();
-		String inp6=td6.getText();
-		String inp7=td7.getText();
-		String inp8=td8.getText();
-
-		this.todos.add(inp1);
-		this.todos.add(inp2);
-		this.todos.add(inp3);
-		this.todos.add(inp4);
-		this.todos.add(inp5);
-		this.todos.add(inp6);
-		this.todos.add(inp7);
-		this.todos.add(inp8);
-
-		int anzahlN=0;
-		for(int y=0; y<anzahl; y++) {
-			if(String.valueOf(y)==null) {
-				todos.remove(y);
-				anzahlN++;
-			}
-		}
-
-		int anzahlTD=anzahl-anzahlN;
-
-		Random random = new Random();
-		int r=random.nextInt((anzahlTD-1));
-
-		for(int i=0; i<anzahlTD; i++) {
-			if(i==r) {
-				this.chosen = String.valueOf(i);
-			}
-		}
-		return this.chosen;
-	}
-	 */
-
+	
 	public String choose() {
 
 		
@@ -183,21 +141,18 @@ public class Decision extends JFrame implements ActionListener{
 			}
 		}
 		
-		ArrayList<String> filled = null;
-		
 		for(int i=0; i<this.anzahl; i++) {
 			if(this.todos.get(i)!=null) {
 				filled.add(this.todos.get(i));
 			}
 		}
 
-		
 		Random random = new Random();
 		int r=random.nextInt((anzahlTD-1));
 
 		for(int i=0; i<anzahlTD; i++) {
 			if(i==r) {
-				this.s2 += filled.get(i);
+				this.s2 += this.filled.get(i);
 			}
 		}
 		
@@ -209,7 +164,6 @@ public class Decision extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		if(src instanceof JButton) {
-			this.tasks();
 			this.choose();
 			JOptionPane.showMessageDialog(rootPane, s2);
 
