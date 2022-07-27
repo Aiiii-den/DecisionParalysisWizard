@@ -21,7 +21,8 @@ public class Decision extends JFrame implements ActionListener{
 	JTextField td8;
 	JButton magic;
 	int anzahl=8;
-	String s2="How about ";
+	String s2;
+	String s;
 
 	public Decision() {
 		super(); 
@@ -114,6 +115,7 @@ public class Decision extends JFrame implements ActionListener{
 		String inp7=this.td7.getText();
 		String inp8=this.td8.getText();
 		
+		this.todos = new ArrayList<>();
 		this.todos.add(inp1);
 		this.todos.add(inp2);
 		this.todos.add(inp3);
@@ -129,10 +131,10 @@ public class Decision extends JFrame implements ActionListener{
 	
 	public String choose() {
 
-		
-		//erst testen wie viele null Elemente in der Liste existieren - this.anzahl-1
-		//neue Liste erstellen mit if( todos.valueOf(i)!=0) filled.add(todos.valueOf(i)
 		this.tasks();
+		this.filled = new ArrayList<>();
+		this.s="";
+		this.s2="How about ";
 		
 		int anzahlTD = this.anzahl;
 		for(int i=0; i<this.anzahl; i++) {
@@ -152,11 +154,11 @@ public class Decision extends JFrame implements ActionListener{
 
 		for(int i=0; i<anzahlTD; i++) {
 			if(i==r) {
-				this.s2 += this.filled.get(i);
+				this.s += this.filled.get(i);
 			}
 		}
 		
-		this.s2+="?";
+		this.s2+=s+"?";
 		return s2;
 	}
 
@@ -165,8 +167,10 @@ public class Decision extends JFrame implements ActionListener{
 		Object src = e.getSource();
 		if(src instanceof JButton) {
 			this.choose();
+			filled.clear();
+			todos.clear();
 			JOptionPane.showMessageDialog(rootPane, s2);
-
+			
 			//implement code which opens a child window which displays the String chosen and has a heading and two buttons
 
 		}
