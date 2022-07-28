@@ -12,8 +12,10 @@ public class Decision2 extends JFrame implements ActionListener{
 	ArrayList<String> todos;
 	JTextField td1, td2, td3, td4, td5, td6, td7, td8;
 	JButton magic;
-	int anzahl, anzahlTD;
+	int anzahl, anzahlTD, r;
 	String s, s2, s3;
+	Object[] options;
+	JPanel input;
 
 
 
@@ -49,9 +51,9 @@ public class Decision2 extends JFrame implements ActionListener{
 
 		//BorderLayout Center
 
-		JPanel input = new JPanel();
-		input.setLayout(new GridLayout(4,2, 20, 20));
-		input.setBackground(Color.MAGENTA);
+		this.input = new JPanel();
+		this.input.setLayout(new GridLayout(4,2, 20, 20));
+		this.input.setBackground(Color.MAGENTA);
 		main.add(input, BorderLayout.CENTER);
 
 		this.td1= new JTextField();
@@ -71,9 +73,9 @@ public class Decision2 extends JFrame implements ActionListener{
 		input.add(this.td6);
 		input.add(this.td7);
 		input.add(this.td8);
-		
+
 		this.anzahl=8;
-		
+
 		//BorderLayout South
 		JPanel south = new JPanel();
 		south.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 10));
@@ -111,7 +113,7 @@ public class Decision2 extends JFrame implements ActionListener{
 		String inp8=this.td8.getText();
 
 		this.todos = new ArrayList<>();
-		
+
 		if(!inp1.isBlank()) {
 			this.todos.add(inp1);
 			this.anzahlTD=1;
@@ -144,7 +146,7 @@ public class Decision2 extends JFrame implements ActionListener{
 			this.todos.add(inp8);
 			this.anzahlTD++;
 		}
-		
+
 
 		return todos;
 
@@ -158,14 +160,14 @@ public class Decision2 extends JFrame implements ActionListener{
 
 		if(!this.todos.isEmpty()) { //difference vs .isBlank() and isEmpty() ?
 			Random random = new Random();
-			int r=random.nextInt(this.anzahlTD);
-	
+			this.r=random.nextInt(this.anzahlTD);
+
 			for(int i=0; i<anzahlTD; i++) {
-				if(i==r) {
-					this.s+=this.todos.get(r);
+				if(i==this.r) {
+					this.s+=this.todos.get(this.r);
 				}
 			}
-	
+
 			this.s2+=s+"?";
 		}
 
@@ -180,24 +182,67 @@ public class Decision2 extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
-		if(src instanceof JButton) {
+		int n = 0;
+		if(src instanceof JButton  && src==this.magic) {
 			this.choose();
-			todos.clear();
+			//todos.clear();
+			this.anzahlTD=0;
 
 			//implement if else statements for JDialog when  this.s.isBlank() --> Warning and one okay button
-			//if(this.s2.matches("You need to enter a task")) {
-			//	JOptionPane.showMessageDialog(rootPane, s2,"Your chosen task", WARNING_MESSAGE);
-			//}
+			if(this.s2.matches("You need to enter a task")) {
+				JOptionPane.showMessageDialog(rootPane,this.s3, "No tasks entered", JOptionPane.WARNING_MESSAGE);
+			}
 
-			//else {
-			JOptionPane.showMessageDialog(rootPane, s2);
-			//}
-			//implement code which opens a child window which displays the String chosen and has a heading and two buttons
+			else {
+				this.options = new Object[]{"finsihed", "go again", "go back"};
+				n = JOptionPane.showOptionDialog(rootPane,
+						s2,
+						"Chosen task",
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						options,
+						options[2]);
+
+
+			}
 
 		}
-
+		if(src instanceof JButton  && n==JOptionPane.YES_OPTION) {
+			//this.todos .set(r, s); 
+			//_______________
+			// wird gleich richtig unschöner Code, aber ich möchte schauen ob der Gedankengang aufgeht
+			if(this.td1.getText()==this.s) {
+				this.td1.setText("");
+			}
+			else if(this.td2.getText()==this.s) {
+				this.td2.setText("");
+			}
+			else if(this.td3.getText()==s) {
+				this.td3.setText("");
+			}
+			else if(this.td4.getText()==s) {
+				this.td4.setText("");
+			}
+			else if(this.td5.getText()==s) {
+				this.td5.setText("");
+			}
+			else if(this.td6.getText()==s) {
+				this.td6.setText("");
+			}
+			else if(this.td7.getText()==s) {
+				this.td7.setText("");	
+			}
+			else if(this.td8.getText()==s) {
+				this.td8.setText("");	
+			}
+			System.out.println("help");
+			
+			this.input.revalidate();
+		}
+		//funktioniert nich ganz so wie gewollt, da die Elemente nach dem finsihed aus der todo AL genommen werden und deswegen die ganze Liste verschoben wird
+ 
 	}
-
 
 
 	public static void main(String[] args) {
