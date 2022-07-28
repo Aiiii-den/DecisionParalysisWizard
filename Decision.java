@@ -126,6 +126,8 @@ public class Decision extends JFrame implements ActionListener{
 		this.todos.add(inp8);
 
 		return todos;
+		
+		//trying to filter through this and not in the choose() method -- only one ArrayList as well
 
 	}
 
@@ -145,7 +147,7 @@ public class Decision extends JFrame implements ActionListener{
 
 		for(int i=0; i<this.anzahl; i++) {
 			if(this.todos.get(i)!=null || this.todos.get(i)!="") {
-				filled.add(this.todos.get(i));
+				this.filled.add(this.todos.get(i));
 			}
 		}
 
