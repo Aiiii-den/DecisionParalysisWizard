@@ -11,18 +11,18 @@ public class Decision extends JFrame implements ActionListener{
 
 	ArrayList<String> todos;
 	ArrayList<String> filled;
-	JTextField td1;
-	JTextField td2;
+	JTextField td1, td2, td3, td4, td5, td6, td7, td8;
+	/*JTextField td2;
 	JTextField td3;
 	JTextField td4;
 	JTextField td5;
 	JTextField td6;
 	JTextField td7;
-	JTextField td8;
+	JTextField td8;*/
 	JButton magic;
 	int anzahl=8;
-	String s2;
-	String s;
+	String s, s2, s3;
+
 
 	public Decision() {
 		super(); 
@@ -114,7 +114,7 @@ public class Decision extends JFrame implements ActionListener{
 		String inp6=this.td6.getText();
 		String inp7=this.td7.getText();
 		String inp8=this.td8.getText();
-		
+
 		this.todos = new ArrayList<>();
 		this.todos.add(inp1);
 		this.todos.add(inp2);
@@ -128,37 +128,43 @@ public class Decision extends JFrame implements ActionListener{
 		return todos;
 
 	}
-	
+
 	public String choose() {
 
 		this.tasks();
 		this.filled = new ArrayList<>();
 		this.s="";
 		this.s2="How about ";
-		
+
 		int anzahlTD = this.anzahl;
 		for(int i=0; i<this.anzahl; i++) {
-			if(this.todos.get(i)==null) {
-				anzahlTD=-1;
+			if(this.todos.get(i)==null || this.todos.get(i)=="") {
+				anzahlTD-=1;
 			}
 		}
-		
+
 		for(int i=0; i<this.anzahl; i++) {
-			if(this.todos.get(i)!=null) {
+			if(this.todos.get(i)!=null || this.todos.get(i)!="") {
 				filled.add(this.todos.get(i));
 			}
 		}
 
 		Random random = new Random();
-		int r=random.nextInt((anzahlTD-1));
+		int r=random.nextInt((anzahlTD));
 
 		for(int i=0; i<anzahlTD; i++) {
 			if(i==r) {
 				this.s += this.filled.get(i);
 			}
 		}
-		
+
 		this.s2+=s+"?";
+
+		if(this.s.isEmpty()) { //difference vs .isBlank() and isEmpty() ?
+			this.s3="You need to enter a task";
+			this.s2=this.s3;
+		}
+
 		return s2;
 	}
 
@@ -169,8 +175,15 @@ public class Decision extends JFrame implements ActionListener{
 			this.choose();
 			filled.clear();
 			todos.clear();
+
+			//implement if else statements for JDialog when  this.s.isBlank() --> Warning and one okay button
+			//if(this.s2.matches("You need to enter a task")) {
+			//	JOptionPane.showMessageDialog(rootPane, s2,"Your chosen task", WARNING_MESSAGE);
+			//}
+
+			//else {
 			JOptionPane.showMessageDialog(rootPane, s2);
-			
+			//}
 			//implement code which opens a child window which displays the String chosen and has a heading and two buttons
 
 		}
