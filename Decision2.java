@@ -212,7 +212,8 @@ public class Decision2 extends JFrame implements ActionListener{
 			//this.todos .set(r, s); 
 			//_______________
 			// wird gleich richtig unschöner Code, aber ich möchte schauen ob der Gedankengang aufgeht
-			if(this.td1.getText()==this.s) {
+			//funktioniert nich ganz so wie gewollt, da die Elemente nach dem finsihed aus der todo AL genommen werden und deswegen die ganze Liste verschoben wird
+			if(this.s==this.td1.getText()) {
 				this.td1.setText("");
 			}
 			else if(this.td2.getText()==this.s) {
@@ -240,8 +241,28 @@ public class Decision2 extends JFrame implements ActionListener{
 			
 			this.input.revalidate();
 		}
-		//funktioniert nich ganz so wie gewollt, da die Elemente nach dem finsihed aus der todo AL genommen werden und deswegen die ganze Liste verschoben wird
+		
  
+		while(src instanceof JButton  && n==JOptionPane.NO_OPTION) {
+			this.todos.clear();
+			this.tasks();
+			this.choose();
+			
+			this.options = new Object[]{"finsihed", "go again", "go back"};
+			n = JOptionPane.showOptionDialog(rootPane,
+					s2,
+					"Chosen task",
+					JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE,
+					null,
+					options,
+					options[2]);
+		}
+		
+		/*if(src instanceof JButton  && n==JOptionPane.YES_OPTION) {
+			JOptionPane.
+			
+		}*/
 	}
 
 
