@@ -6,18 +6,21 @@ import java.awt.*;
 import javax.swing.*;
 import java.util.*;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
 public class Decision2 extends JFrame implements ActionListener{
 
 	ArrayList<String> todos;
+	ArrayList<JTextField> tf;
 	JTextField td1, td2, td3, td4, td5, td6, td7, td8;
 	JButton magic;
-	int anzahl, anzahlTD, r;
+	int anzahl, anzahlTD, r, n;
 	String s, s2, s3;
 	Object[] options;
 	JPanel input;
+	JButton fin, again, cancel;
 
-
+	private JDialog dialog;
 
 	public Decision2() {
 		super(); 
@@ -113,37 +116,46 @@ public class Decision2 extends JFrame implements ActionListener{
 		String inp8=this.td8.getText();
 
 		this.todos = new ArrayList<>();
+		this.tf = new ArrayList<>();
 
 		if(!inp1.isBlank()) {
 			this.todos.add(inp1);
+			this.tf.add(td1);
 			this.anzahlTD=1;
 		}
 		if(!inp2.isBlank()) {
 			this.todos.add(inp2);
+			this.tf.add(td2);
 			this.anzahlTD++;
 		}
 		if(!inp3.isBlank()) {
 			this.todos.add(inp3);
+			this.tf.add(td3);
 			this.anzahlTD++;
 		}
 		if(!inp4.isBlank()) {
 			this.todos.add(inp4);
+			this.tf.add(td4);
 			this.anzahlTD++;
 		}
 		if(!inp5.isBlank()) {
 			this.todos.add(inp5);
+			this.tf.add(td5);
 			this.anzahlTD++;
 		}
 		if(!inp6.isBlank()) {
 			this.todos.add(inp6);
+			this.tf.add(td6);
 			this.anzahlTD++;
 		}
 		if(!inp7.isBlank()) {
 			this.todos.add(inp7);
+			this.tf.add(td7);
 			this.anzahlTD++;
 		}
 		if(!inp8.isBlank()) {
 			this.todos.add(inp8);
+			this.tf.add(td8);
 			this.anzahlTD++;
 		}
 
@@ -182,20 +194,18 @@ public class Decision2 extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
-		int n = 0;
+		
 		if(src instanceof JButton  && src==this.magic) {
 			this.choose();
-			//todos.clear();
 			this.anzahlTD=0;
 
-			//implement if else statements for JDialog when  this.s.isBlank() --> Warning and one okay button
 			if(this.s2.matches("You need to enter a task")) {
 				JOptionPane.showMessageDialog(rootPane,this.s3, "No tasks entered", JOptionPane.WARNING_MESSAGE);
 			}
 
 			else {
 				this.options = new Object[]{"finsihed", "go again", "go back"};
-				n = JOptionPane.showOptionDialog(rootPane,
+				this.n = JOptionPane.showOptionDialog(rootPane,
 						s2,
 						"Chosen task",
 						JOptionPane.YES_NO_CANCEL_OPTION,
@@ -203,51 +213,34 @@ public class Decision2 extends JFrame implements ActionListener{
 						null,
 						options,
 						options[2]);
-
-
 			}
 
 		}
-		if(src instanceof JButton  && n==JOptionPane.YES_OPTION) {
-			//this.todos .set(r, s); 
-			//_______________
-			// wird gleich richtig unschöner Code, aber ich möchte schauen ob der Gedankengang aufgeht
-			//funktioniert nich ganz so wie gewollt, da die Elemente nach dem finsihed aus der todo AL genommen werden und deswegen die ganze Liste verschoben wird
-			if(this.s==this.td1.getText()) {
-				this.td1.setText("");
-			}
-			else if(this.td2.getText()==this.s) {
-				this.td2.setText("");
-			}
-			else if(this.td3.getText()==s) {
-				this.td3.setText("");
-			}
-			else if(this.td4.getText()==s) {
-				this.td4.setText("");
-			}
-			else if(this.td5.getText()==s) {
-				this.td5.setText("");
-			}
-			else if(this.td6.getText()==s) {
-				this.td6.setText("");
-			}
-			else if(this.td7.getText()==s) {
-				this.td7.setText("");	
-			}
-			else if(this.td8.getText()==s) {
-				this.td8.setText("");	
-			}
-			System.out.println("help");
+		if(src instanceof JButton && this.todos.isEmpty()!=true && this.n==JOptionPane.YES_OPTION) {
 			
+			
+			this.td1.setText("");
+			this.td2.setText("");
+			this.td3.setText("");
+			this.td4.setText("");
+			this.td4.setText("");
+			this.td5.setText("");
+			this.td6.setText("");
+			this.td7.setText("");
+			this.td8.setText("");
+			
+			System.out.println("help");
+
 			this.input.revalidate();
 		}
-		
- 
-		while(src instanceof JButton  && n==JOptionPane.NO_OPTION) {
+
+
+
+		while(src instanceof JButton  && this.n==JOptionPane.NO_OPTION) {
 			this.todos.clear();
 			this.tasks();
 			this.choose();
-			
+
 			this.options = new Object[]{"finsihed", "go again", "go back"};
 			n = JOptionPane.showOptionDialog(rootPane,
 					s2,
@@ -257,13 +250,10 @@ public class Decision2 extends JFrame implements ActionListener{
 					null,
 					options,
 					options[2]);
+			System.out.println("test");
 		}
-		
-		/*if(src instanceof JButton  && n==JOptionPane.YES_OPTION) {
-			JOptionPane.
-			
-		}*/
 	}
+
 
 
 	public static void main(String[] args) {
