@@ -2,6 +2,7 @@ package decisionParalysisWizard;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.awt.*;
 import javax.swing.*;
 import java.util.*;
@@ -13,14 +14,16 @@ public class Decision2 extends JFrame implements ActionListener{
 	ArrayList<String> todos;
 	ArrayList<JTextField> tf;
 	JTextField td1, td2, td3, td4, td5, td6, td7, td8;
-	JButton magic;
+	JButton magic, history;
 	int anzahl, anzahlTD, r, n;
 	String s, s2, s3;
 	Object[] options;
 	JPanel input;
 	JButton fin, again, cancel;
-
-	private JDialog dialog;
+	Map<LocalDate, String> hist;
+	LocalDate date;
+	String histSt="Finsihed: ";
+	
 
 	public Decision2() {
 		super(); 
@@ -81,10 +84,13 @@ public class Decision2 extends JFrame implements ActionListener{
 
 		//BorderLayout South
 		JPanel south = new JPanel();
-		south.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 10));
+		south.setLayout(new FlowLayout(FlowLayout.CENTER, 55, 12));
 		south.setBackground(Color.MAGENTA);
 		main.add(south, BorderLayout.SOUTH);
 
+		this.history = new JButton("History");
+		south.add(this.history);
+		
 		this.magic = new JButton("Let the Magic Happen ^^");
 		south.add(this.magic);
 
@@ -99,7 +105,11 @@ public class Decision2 extends JFrame implements ActionListener{
 		west.setBackground(Color.MAGENTA);
 		main.add(west, BorderLayout.WEST);
 
-		magic.addActionListener(this);
+		this.magic.addActionListener(this);
+		this.history.addActionListener(this);
+		
+		this.todos = new ArrayList<>();
+		this.tf = new ArrayList<>();
 
 		return main;
 
@@ -115,8 +125,7 @@ public class Decision2 extends JFrame implements ActionListener{
 		String inp7=this.td7.getText();
 		String inp8=this.td8.getText();
 
-		this.todos = new ArrayList<>();
-		this.tf = new ArrayList<>();
+		
 		this.anzahlTD=0;
 
 		if(!inp1.isBlank()) {
@@ -232,46 +241,70 @@ public class Decision2 extends JFrame implements ActionListener{
 					null,
 					options,
 					options[2]);
-			System.out.println("test");
 		}
 
 		if(src instanceof JButton && this.todos.isEmpty()!=true && this.n==JOptionPane.YES_OPTION) {
-
+			this.date = LocalDate.now();
+			this.hist = new HashMap<>();
+			
 			if(this.tf.get(this.r) ==this.td1) {
+				this.hist.put(this.date, this.td1.getText());
 				this.td1.setText("");
 				this.anzahlTD-=1;
 			}
 			else if(this.tf.get(this.r) ==this.td2) {
+				this.hist.put(this.date, this.td2.getText());
 				this.td2.setText("");
 				this.anzahlTD-=1;
 			}
 			else if(this.tf.get(this.r) ==this.td3) {
+				this.hist.put(this.date, this.td3.getText());
 				this.td3.setText("");
 				this.anzahlTD-=1;
 			}
 			else if(this.tf.get(this.r) ==this.td4) {
+				this.hist.put(this.date, this.td4.getText());
 				this.td4.setText("");
 				this.anzahlTD-=1;
 			}
 			else if(this.tf.get(this.r) ==this.td5) {
+				this.hist.put(this.date, this.td5.getText());
 				this.td5.setText("");
 				this.anzahlTD-=1;
 			}
 			else if(this.tf.get(this.r) ==this.td6) {
+				this.hist.put(this.date, this.td6.getText());
 				this.td6.setText("");
 				this.anzahlTD-=1;
 			}
 			else if(this.tf.get(this.r) ==this.td7) {
+				this.hist.put(this.date, this.td7.getText());
 				this.td7.setText("");
 				this.anzahlTD-=1;
 			}
 			else if(this.tf.get(this.r) ==this.td8) {
+				this.hist.put(this.date, this.td8.getText());
 				this.td8.setText("");
 				this.anzahlTD-=1;
 			}
 
+			for(Map.Entry<LocalDate, String> m : hist.entrySet()) {
+				this.histSt+= "\n" + ("Date: " + m.getKey() + " Task: " + m.getValue());
+			}
+				
+				
 			this.todos.clear();
 			this.input.revalidate();
+		}
+		
+		
+		if(src instanceof JButton && src==this.history) {
+			if(this.tf.isEmpty()) {
+				JOptionPane.showMessageDialog(rootPane, "Nothing finished yet", "Finished Tasks", JOptionPane.QUESTION_MESSAGE);
+			}
+			else {
+			JOptionPane.showMessageDialog(rootPane, this.histSt, "Finished Tasks", JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 	}
 
