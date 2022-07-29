@@ -107,9 +107,6 @@ public class Decision2 extends JFrame implements ActionListener{
 
 		this.magic.addActionListener(this);
 		this.history.addActionListener(this);
-		
-		this.todos = new ArrayList<>();
-		this.tf = new ArrayList<>();
 
 		return main;
 
@@ -125,6 +122,8 @@ public class Decision2 extends JFrame implements ActionListener{
 		String inp7=this.td7.getText();
 		String inp8=this.td8.getText();
 
+		this.todos = new ArrayList<>();
+		this.tf = new ArrayList<>();
 		
 		this.anzahlTD=0;
 
@@ -250,6 +249,9 @@ public class Decision2 extends JFrame implements ActionListener{
 			if(this.tf.get(this.r) ==this.td1) {
 				this.hist.put(this.date, this.td1.getText());
 				this.td1.setText("");
+				//JTextField ff=new JTextField(""); 
+				//this.tf.get(this.r).replaceSelection("");
+				
 				this.anzahlTD-=1;
 			}
 			else if(this.tf.get(this.r) ==this.td2) {
@@ -287,6 +289,12 @@ public class Decision2 extends JFrame implements ActionListener{
 				this.td8.setText("");
 				this.anzahlTD-=1;
 			}
+			
+			/*for(JTextField j : this.tf) {
+				this.tf.get(this.r).replaceSelection("");
+			}*/
+			
+			
 
 			for(Map.Entry<LocalDate, String> m : hist.entrySet()) {
 				this.histSt+= "\n" + ("Date: " + m.getKey() + " Task: " + m.getValue());
@@ -309,10 +317,8 @@ public class Decision2 extends JFrame implements ActionListener{
 	}
 
 
-
 	public static void main(String[] args) {
 		new Decision2();
-
 	}
-
+	
 }
