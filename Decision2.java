@@ -117,11 +117,12 @@ public class Decision2 extends JFrame implements ActionListener{
 
 		this.todos = new ArrayList<>();
 		this.tf = new ArrayList<>();
+		this.anzahlTD=0;
 
 		if(!inp1.isBlank()) {
 			this.todos.add(inp1);
 			this.tf.add(td1);
-			this.anzahlTD=1;
+			this.anzahlTD++;
 		}
 		if(!inp2.isBlank()) {
 			this.todos.add(inp2);
@@ -214,8 +215,26 @@ public class Decision2 extends JFrame implements ActionListener{
 						options,
 						options[2]);
 			}
-
 		}
+
+
+		while(src instanceof JButton  && this.n==JOptionPane.NO_OPTION) {
+			this.todos.clear();
+			this.tasks();
+			this.choose();
+
+			this.options = new Object[]{"finsihed", "go again", "go back"};
+			n = JOptionPane.showOptionDialog(rootPane,
+					s2,
+					"Chosen task",
+					JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE,
+					null,
+					options,
+					options[2]);
+			System.out.println("test");
+		}
+
 		if(src instanceof JButton && this.todos.isEmpty()!=true && this.n==JOptionPane.YES_OPTION) {
 
 			if(this.tf.get(this.r) ==this.td1) {
@@ -253,23 +272,6 @@ public class Decision2 extends JFrame implements ActionListener{
 
 			this.todos.clear();
 			this.input.revalidate();
-		}
-
-		while(src instanceof JButton  && this.n==JOptionPane.NO_OPTION) {
-			this.todos.clear();
-			this.tasks();
-			this.choose();
-
-			this.options = new Object[]{"finsihed", "go again", "go back"};
-			n = JOptionPane.showOptionDialog(rootPane,
-					s2,
-					"Chosen task",
-					JOptionPane.YES_NO_CANCEL_OPTION,
-					JOptionPane.QUESTION_MESSAGE,
-					null,
-					options,
-					options[2]);
-			System.out.println("test");
 		}
 	}
 
