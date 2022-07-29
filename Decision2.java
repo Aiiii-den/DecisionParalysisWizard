@@ -22,7 +22,7 @@ public class Decision2 extends JFrame implements ActionListener{
 	JButton fin, again, cancel;
 	Map<LocalDate, String> hist;
 	LocalDate date;
-	String histSt="Finsihed: ";
+	String histSt="";
 	
 
 	public Decision2() {
@@ -297,7 +297,7 @@ public class Decision2 extends JFrame implements ActionListener{
 			
 
 			for(Map.Entry<LocalDate, String> m : hist.entrySet()) {
-				this.histSt+= "\n" + ("Date: " + m.getKey() + " Task: " + m.getValue());
+				this.histSt+=("Date: " + m.getKey() + " Task: " + m.getValue() + "\n" );
 			}
 				
 				
@@ -317,8 +317,10 @@ public class Decision2 extends JFrame implements ActionListener{
 	}
 
 
+
 	public static void main(String[] args) {
 		new Decision2();
+
 	}
-	
+
 }
