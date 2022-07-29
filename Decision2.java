@@ -194,7 +194,7 @@ public class Decision2 extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
-		
+
 		if(src instanceof JButton  && src==this.magic) {
 			this.choose();
 			this.anzahlTD=0;
@@ -217,36 +217,43 @@ public class Decision2 extends JFrame implements ActionListener{
 
 		}
 		if(src instanceof JButton && this.todos.isEmpty()!=true && this.n==JOptionPane.YES_OPTION) {
-			
+
 			if(this.tf.get(this.r) ==this.td1) {
 				this.td1.setText("");
+				this.anzahlTD-=1;
 			}
 			else if(this.tf.get(this.r) ==this.td2) {
-			this.td2.setText("");}
-			
+				this.td2.setText("");
+				this.anzahlTD-=1;
+			}
 			else if(this.tf.get(this.r) ==this.td3) {
 				this.td3.setText("");
+				this.anzahlTD-=1;
 			}
 			else if(this.tf.get(this.r) ==this.td4) {
 				this.td4.setText("");
+				this.anzahlTD-=1;
 			}
 			else if(this.tf.get(this.r) ==this.td5) {
 				this.td5.setText("");
+				this.anzahlTD-=1;
 			}
 			else if(this.tf.get(this.r) ==this.td6) {
 				this.td6.setText("");
+				this.anzahlTD-=1;
 			}
 			else if(this.tf.get(this.r) ==this.td7) {
 				this.td7.setText("");
+				this.anzahlTD-=1;
 			}
 			else if(this.tf.get(this.r) ==this.td8) {
 				this.td8.setText("");
+				this.anzahlTD-=1;
 			}
-			
+
+			this.todos.clear();
 			this.input.revalidate();
 		}
-
-
 
 		while(src instanceof JButton  && this.n==JOptionPane.NO_OPTION) {
 			this.todos.clear();
