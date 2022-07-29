@@ -5,6 +5,10 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+
 import java.util.*;
 import java.util.List;
 import java.util.function.UnaryOperator;
@@ -51,8 +55,18 @@ public class Decision2 extends JFrame implements ActionListener{
 		flow.setBackground(Color.MAGENTA);
 		main.add(flow, BorderLayout.NORTH);
 
-		JLabel yourTasks = new JLabel("Your tasks:");
-		yourTasks.setForeground(Color.BLACK);
+		
+		
+		
+		Border whiteLine = BorderFactory.createLineBorder(Color.WHITE);
+		JLabel yourTasks = new JLabel("YOUR TASKS");
+		
+		EmptyBorder eBorder = new EmptyBorder(2, 10, 2, 10); // oben, rechts, unten, links
+       		LineBorder lBorder = new LineBorder(new Color(255, 255, 255));
+        	yourTasks.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
+        
+		yourTasks.setForeground(Color.WHITE);
+		//yourTasks.setBorder(whiteLine);
 		flow.add(yourTasks);
 
 		//BorderLayout Center
@@ -317,10 +331,10 @@ public class Decision2 extends JFrame implements ActionListener{
 	}
 
 
-
+	
 	public static void main(String[] args) {
 		new Decision2();
-
+		
 	}
 
 }
