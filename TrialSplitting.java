@@ -180,8 +180,7 @@ public class TrialSplitting extends JFrame implements ActionListener{
 			this.tf.add(td8);
 			this.anzahlTD++;
 		}
-
-
+		
 		return todos;
 	}
 
@@ -223,7 +222,7 @@ public class TrialSplitting extends JFrame implements ActionListener{
 
 		if(src instanceof JButton  && src==this.magic) {
 			this.magicClicked();
-			if(!this.todos.isEmpty()) {
+			if(!this.todos.isEmpty() && n!=JOptionPane.CANCEL_OPTION) {
 				this.magicButton=true;
 			}
 		}
@@ -240,6 +239,10 @@ public class TrialSplitting extends JFrame implements ActionListener{
 		if(src instanceof JButton && src==this.history) {
 			getHistory();
 		}
+		
+		/*if(src instanceof JButton && this.n==JOptionPane.CANCEL_OPTION) {
+			this.input.revalidate();
+		}*/
 	}
 
 
@@ -279,6 +282,7 @@ public class TrialSplitting extends JFrame implements ActionListener{
 				null,
 				options,
 				options[2]);
+		this.magicButton=false;
 	}
 
 
