@@ -1,4 +1,4 @@
-package decisionParalysisWizard;
+package Program;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -282,7 +282,7 @@ public class TrialSplitting extends JFrame implements ActionListener{
 				null,
 				options,
 				options[2]);
-		this.magicButton=false;
+		//this.magicButton=false;
 	}
 
 
