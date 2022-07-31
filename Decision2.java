@@ -245,6 +245,7 @@ public class Decision2 extends JFrame implements ActionListener{
 		while(src instanceof JButton  && this.n==JOptionPane.NO_OPTION) {
 			this.todos.clear();
 			this.tasks();
+			this.rt=this.r;
 			this.choose();
 
 			this.options = new Object[]{"finsihed", "go again", "go back"};
