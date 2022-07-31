@@ -27,6 +27,7 @@ public class TrialSplitting extends JFrame implements ActionListener{
 	Map<LocalDate, String> hist;
 	LocalDate date;
 	String histSt="";
+	Boolean magicButton;
 
 
 	public TrialSplitting() {
@@ -219,11 +220,13 @@ public class TrialSplitting extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
-		Boolean magicButton=false;
+		this.magicButton=false;
 
 		if(src instanceof JButton  && src==this.magic) {
 			this.magicClicked();
-			magicButton=true;
+			if(!this.todos.isEmpty()) {
+				this.magicButton=true;
+			}
 		}
 
 		while(src instanceof JButton && this.n==JOptionPane.NO_OPTION) {
@@ -234,7 +237,7 @@ public class TrialSplitting extends JFrame implements ActionListener{
 		if(src instanceof JButton && magicButton==true) {
 			this.fillMap();
 		}
-		
+
 		if(src instanceof JButton && src==this.history) {
 			getHistory();
 		}
@@ -337,7 +340,7 @@ public class TrialSplitting extends JFrame implements ActionListener{
 		this.todos.clear();
 		this.input.revalidate();
 	}
-	
+
 	public void getHistory() {
 		if(this.histSt=="") {
 			JOptionPane.showMessageDialog(rootPane, "Nothing finished yet", "Finished Tasks", JOptionPane.QUESTION_MESSAGE);
@@ -348,9 +351,9 @@ public class TrialSplitting extends JFrame implements ActionListener{
 	}
 
 
-public static void main(String[] args) {
-	new TrialSplitting();
+	public static void main(String[] args) {
+		new TrialSplitting();
 
-}
+	}
 
 }
