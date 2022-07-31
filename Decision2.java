@@ -19,7 +19,7 @@ public class Decision2 extends JFrame implements ActionListener{
 	ArrayList<JTextField> tf;
 	JTextField td1, td2, td3, td4, td5, td6, td7, td8;
 	JButton magic, history;
-	int anzahl, anzahlTD, r, n;
+	int anzahl, anzahlTD, r, n, rt;
 	String s, s2, s3;
 	Object[] options;
 	JPanel input;
@@ -27,7 +27,7 @@ public class Decision2 extends JFrame implements ActionListener{
 	Map<LocalDate, String> hist;
 	LocalDate date;
 	String histSt="";
-	
+
 
 	public Decision2() {
 		super(); 
@@ -56,17 +56,15 @@ public class Decision2 extends JFrame implements ActionListener{
 		main.add(flow, BorderLayout.NORTH);
 
 		
-		
-		
+
 		Border whiteLine = BorderFactory.createLineBorder(Color.WHITE);
 		JLabel yourTasks = new JLabel("YOUR TASKS");
-		
+
 		EmptyBorder eBorder = new EmptyBorder(2, 10, 2, 10); // oben, rechts, unten, links
-       		LineBorder lBorder = new LineBorder(new Color(255, 255, 255));
-        	yourTasks.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
-        
+		LineBorder lBorder = new LineBorder(new Color(255, 255, 255));
+		yourTasks.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
+
 		yourTasks.setForeground(Color.WHITE);
-		//yourTasks.setBorder(whiteLine);
 		flow.add(yourTasks);
 
 		//BorderLayout Center
@@ -104,7 +102,7 @@ public class Decision2 extends JFrame implements ActionListener{
 
 		this.history = new JButton("History");
 		south.add(this.history);
-		
+
 		this.magic = new JButton("Let the Magic Happen ^^");
 		south.add(this.magic);
 
@@ -138,7 +136,7 @@ public class Decision2 extends JFrame implements ActionListener{
 
 		this.todos = new ArrayList<>();
 		this.tf = new ArrayList<>();
-		
+
 		this.anzahlTD=0;
 
 		if(!inp1.isBlank()) {
@@ -196,7 +194,11 @@ public class Decision2 extends JFrame implements ActionListener{
 		if(!this.todos.isEmpty()) { //difference vs .isBlank() and isEmpty() ?
 			Random random = new Random();
 			this.r=random.nextInt(this.anzahlTD);
-
+			
+			while(this.r==this.rt && this.todos.size()>1) {
+				random = new Random();
+				this.r=random.nextInt(this.anzahlTD);
+			}
 			for(int i=0; i<anzahlTD; i++) {
 				if(i==this.r) {
 					this.s+=this.todos.get(this.r);
@@ -259,13 +261,13 @@ public class Decision2 extends JFrame implements ActionListener{
 		if(src instanceof JButton && this.todos.isEmpty()!=true && this.n==JOptionPane.YES_OPTION) {
 			this.date = LocalDate.now();
 			this.hist = new HashMap<>();
-			
+
 			if(this.tf.get(this.r) ==this.td1) {
 				this.hist.put(this.date, this.td1.getText());
 				this.td1.setText("");
 				//JTextField ff=new JTextField(""); 
 				//this.tf.get(this.r).replaceSelection("");
-				
+
 				this.anzahlTD-=1;
 			}
 			else if(this.tf.get(this.r) ==this.td2) {
@@ -303,38 +305,38 @@ public class Decision2 extends JFrame implements ActionListener{
 				this.td8.setText("");
 				this.anzahlTD-=1;
 			}
-			
+
 			/*for(JTextField j : this.tf) {
 				this.tf.get(this.r).replaceSelection("");
 			}*/
-			
-			
+
+
 
 			for(Map.Entry<LocalDate, String> m : hist.entrySet()) {
 				this.histSt+=("Date: " + m.getKey() + " Task: " + m.getValue() + "\n" );
 			}
-				
-				
+
+			this.rt=this.r-1;
 			this.todos.clear();
 			this.input.revalidate();
 		}
-		
-		
+
+
 		if(src instanceof JButton && src==this.history) {
 			if(this.tf.isEmpty()) {
 				JOptionPane.showMessageDialog(rootPane, "Nothing finished yet", "Finished Tasks", JOptionPane.QUESTION_MESSAGE);
 			}
 			else {
-			JOptionPane.showMessageDialog(rootPane, this.histSt, "Finished Tasks", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(rootPane, this.histSt, "Finished Tasks", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}
 
 
-	
+
 	public static void main(String[] args) {
 		new Decision2();
-		
+
 	}
 
 }
