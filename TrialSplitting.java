@@ -183,7 +183,6 @@ public class TrialSplitting extends JFrame implements ActionListener{
 
 
 		return todos;
-
 	}
 
 	public String choose() {
