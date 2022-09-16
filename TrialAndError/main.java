@@ -1,4 +1,4 @@
-package decisionParalysisWizard;
+package TrialAndError;
 
 public class main {
 

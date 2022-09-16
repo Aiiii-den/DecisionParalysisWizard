@@ -230,9 +230,9 @@ public class TrialSplitting extends JFrame implements ActionListener{
 		while(src instanceof JButton && this.n==JOptionPane.NO_OPTION) {
 			this.goAgainClicked();
 		}
+		
 
-
-		if(src instanceof JButton && magicButton==true) {
+		if(src instanceof JButton && this.n==JOptionPane.YES_OPTION && this.magicButton==true) {
 			this.fillMap();
 		}
 
